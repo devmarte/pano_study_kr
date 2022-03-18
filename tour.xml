@@ -1,0 +1,269 @@
+﻿<krpano version="1.20.11" title="Virtual Tour" logkey="true">
+
+	<include url="skin/vtourskin.xml" />
+	<include url="%VIEWER%/plugins/combobox.xml" />
+	<include url="%VIEWER%/plugins/contextmenu.xml" />
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="true"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               maps_loadonfirstuse="true"
+	               gyro="true"
+	               gyro_keeplookingdirection="false"
+	               webvr="true"
+	               webvr_keeplookingdirection="true"
+	               webvr_prev_next_hotspots="true"
+	               autotour="false"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext=""
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+
+
+
+	<combobox name="cbsettings" design="vtour" align="righttop" x="10" y="10" onchange="selectItemByName(0);">
+		<item name="item0" caption="SETTINGS" />
+		<item name="item1" caption="Drag Control"       onclick="set(control.mode,drag);" />
+		<item name="item2" caption="Move Control"       onclick="set(control.mode,moveto);" />
+		<item name="item3" caption="Normal View"        onclick="cm_normal_view();" />
+		<item name="item4" caption="Fisheye View"       onclick="cm_fisheye_view();" />
+		<item name="item5" caption="Stereographic View" onclick="cm_stereographic_view();" />
+		<item name="item6" caption="Architectural View" onclick="cm_architectural_view();" />
+		<item name="item7" caption="Pannini View"       onclick="cm_pannini_view();" />
+		<item name="item8" caption="Little Planet View" onclick="cm_littleplanet_view();" />
+	</combobox>
+
+<combobox name="panobox" design="vtour" align="righttop" x="10" y="200">
+	<item name="item_1" caption="테스트1" />
+	<item name="item_2" caption="테스트2" />
+</combobox>
+	
+	<hotspot name="to_garden"
+		style="btn"
+		onclick="loadscene(scene_sky,var1=val1,merge,openblend(1,0.5,1.5,0.5, easeinout),ask(););"
+	>
+		<point ath="50" atv="50" />
+		<point ath="60" atv="10" />
+		<point ath="70" atv="0" />
+	</hotspot>
+	<hotspot name="to_sky"
+		style="btn"
+		onclick="loadscene(scene_garden,var1=val1,merge,openblend(1,0.5,1.5,0.5, easeinout),ask2(););"
+	>
+		<point ath="-10" atv="50" />
+		<point ath="-20" atv="10" />
+		<point ath="-30" atv="0" />
+	</hotspot>
+
+<action name="ask" type="Javascript">
+	<![CDATA[
+    if(confirm('동물을 사랑하십니까')) {
+		krpano.actions.loadscene('scene_sky',null,'MERGE','BLEND(0.5)');
+	}else {
+		alert('더 사랑하게나')
+		krpano.actions.loadscene('scene_garden',null,'MERGE','BLEND(0.5)');
+	}
+]]>
+</action>
+
+<action name="ask2" type="Javascript">
+	<![CDATA[
+    if(confirm('이세상이 끝이라고 생각하십니까?')) {
+		krpano.actions.loadscene('scene_sky',null,'MERGE','BLEND(0.5)');
+	}else {
+		alert('환생ㄱㄱ')
+		krpano.actions.loadscene('scene_garden',null,'MERGE','BLEND(0.5)');
+	}
+]]>
+</action>
+
+
+<style name="btn"
+		capture="false"
+         keep="true"
+         visible="true"
+         enabled="true"
+         handcursor="true"
+         cursor="pointer"
+         style=""
+         alpha="1.0"
+         polyline="false"
+         fillcolor="0xffbe00"
+         fillalpha="0.5"
+         borderwidth="3.0"
+         bordercolor="0xAAAAAA"
+         borderalpha="1.0"
+         borderzoom="0.0"
+         borderhittest="false"
+         subdiv="true"
+         onover=""
+         onhover=""
+         onout=""
+         ondown=""
+         onup=""
+         onclick=""
+         onloaded=""
+/>
+	<scene name="scene_garden" title="garden" onstart="" thumburl="panos/garden.tiles/thumb.jpg" lat="45.97945688" lng="9.26377208" heading="256.8">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="20.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/garden.tiles/preview.jpg" />
+
+		<image prealign="0|256.8|0">
+			<cube url="panos/garden.tiles/%s/l%l/%0v/l%l_%s_%0v_%0h.jpg" multires="512,640,1152,2304,4672" />
+		</image>
+		<action name="firts_action" autorun="onload">
+			trace('onload! from GARDEN');
+		</action>
+
+		<action name="firts_action" autorun="preinit">
+			trace('preinit! from GARDEN');
+		</action>
+
+		<action name="firts_action" autorun="onstart">
+			trace('onstart! from GARDEN');
+		</action>
+		<hotspot name="doggy"
+         type="image"
+         url="/skin/doggy.png"
+         keep="false"
+         renderer="webgl"
+         visible="true"
+         enabled="true"
+         handcursor="true"
+         cursor="pointer"
+         maskchildren="false"
+         zorder=""
+         style=""
+         ath="0.0" atv="0.0"
+         edge="center"
+         zoom="false"
+         distorted="false"
+         rx="0.0" ry="0.0" rz="0.0"
+         width="250" height="300"
+         scale="1.0"
+         rotate="0.0"
+         alpha="1.0"
+		 capture="false"
+         onover.addevent=""
+         onhover.addevent=""
+         onout.addevent=""
+         ondown.addevent=""
+         onup.addevent=""
+         onclick.addevent=""
+         onloaded.addevent=""
+         />
+			<layer name="info" type="text" css="color:#000000;text-align:right;" bg="false" txtshadow="0 1 2 0xFFFFFF 1.0" align="lefttop" x="2" y="2" handcursor="false" capture="false"
+		html="더 자세한것은 [a href='파노스닷컴' target='_blank' style='color:#000000; font-size:2rem;']시욱스닷컴[/a]"
+		/>
+
+	</scene>
+
+	<scene name="scene_sky" title="sky" onstart="first_action(); dotest();" thumburl="panos/sky.tiles/thumb.jpg" lat="45.27134703" lng="-75.74751894" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="20.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="range" />
+
+		<preview url="panos/sky.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/sky.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2112,4224" />
+		</image>
+
+		<action name="first_action">
+			trace('onstart! from SKY');
+			trace(var1);
+		</action>
+		<hotspot name="aero"
+         type="image"
+         url="/skin/aero.png"
+         keep="false"
+         renderer="webgl"
+         visible="true"
+         enabled="true"
+         handcursor="true"
+         cursor="pointer"
+         maskchildren="false"
+         zorder=""
+         style=""
+         ath="20.0" atv="-30.0"
+         edge="center"
+         zoom="false"
+         distorted="false"
+         rx="0.0" ry="0.0" rz="0.0"
+         width="250" height="150"
+         scale="1.0"
+         rotate="0.0"
+         alpha="1.0"
+		 capture="false"
+		 onloaded="doaero()"
+         />
+         <!-- onclick="doaero();" -->
+		 <action name='doaero'>
+		 	tween(ath,-100,5.0);
+		 	tween(atv,-100,5.0);
+		 </action>
+	<action name="dotest">
+	callwith(hotspot[aero], onloaded);
+	</action>
+
+	</scene>
+
+
+</krpano>
