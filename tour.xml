@@ -92,7 +92,7 @@
 	
 	<hotspot name="to_garden"
 		style="btn"
-		onclick="loadscene(scene_sky,var1=val1,merge,openblend(1,0.5,1.5,0.5, easeinout),ask(););"
+		onclick="loadscene(scene_sky,var1=val1,keepmoving,openblend(1,0.5,1.5,0.5, easeinout),ask(););"
 	>
 		<point ath="50" atv="50" />
 		<point ath="60" atv="10" />
@@ -100,7 +100,7 @@
 	</hotspot>
 	<hotspot name="to_sky"
 		style="btn"
-		onclick="loadscene(scene_garden,var1=val1,merge,openblend(1,0.5,1.5,0.5, easeinout),ask2(););"
+		onclick="loadscene(scene_garden,var1=val1,keepmoving,openblend(1,0.5,1.5,0.5, easeinout),ask2(););"
 	>
 		<point ath="-10" atv="50" />
 		<point ath="-20" atv="10" />
@@ -110,10 +110,10 @@
 <action name="ask" type="Javascript">
 	<![CDATA[
     if(confirm('동물을 사랑하십니까')) {
-		krpano.actions.loadscene('scene_sky',null,'MERGE','BLEND(0.5)');
+		krpano.actions.loadscene('scene_sky',null,'keepmoving','BLEND(0.5)');
 	}else {
 		alert('더 사랑하게나')
-		krpano.actions.loadscene('scene_garden',null,'MERGE','BLEND(0.5)');
+		krpano.actions.loadscene('scene_garden',null,'keepmoving','BLEND(0.5)');
 	}
 ]]>
 </action>
@@ -121,10 +121,10 @@
 <action name="ask2" type="Javascript">
 	<![CDATA[
     if(confirm('이세상이 끝이라고 생각하십니까?')) {
-		krpano.actions.loadscene('scene_sky',null,'MERGE','BLEND(0.5)');
+		krpano.actions.loadscene('scene_sky',null,'keepmoving','BLEND(0.5)');
 	}else {
 		alert('환생ㄱㄱ')
-		krpano.actions.loadscene('scene_garden',null,'MERGE','BLEND(0.5)');
+		krpano.actions.loadscene('scene_garden',null,'keepmoving','BLEND(0.5)');
 	}
 ]]>
 </action>
